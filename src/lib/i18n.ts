@@ -190,6 +190,4 @@ export const content: Record<Locale, Content> = {
     finalCta: { title: "Comece a criar sua landing page hoje", subtitle: "Sem código. Sem design. Apenas resultados.", cta: "Começar Grátis" },
     footer: { product: "Produto", pricing: "Preços", contact: "Contato", terms: "Termos", rights: "Todos os direitos reservados." },
   },
-} as const;
-
-export type Content = typeof content.en;
+};
