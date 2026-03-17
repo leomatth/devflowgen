@@ -1,6 +1,23 @@
 export type Locale = "en" | "es" | "pt";
 
-export const content = {
+interface StepItem { step: string; title: string; desc: string; }
+interface FeatureItem { title: string; desc: string; }
+interface BenefitItem { title: string; desc: string; }
+interface PlanInfo { name: string; price: string; period: string; features: string[]; cta: string; badge?: string; }
+
+export interface Content {
+  nav: { product: string; pricing: string; contact: string; start: string; };
+  hero: { title: string; subtitle: string; cta: string; demo: string; };
+  social: { text: string; };
+  steps: { title: string; subtitle: string; items: StepItem[]; };
+  features: { title: string; subtitle: string; items: FeatureItem[]; };
+  benefits: { title: string; subtitle: string; items: BenefitItem[]; };
+  pricing: { title: string; subtitle: string; free: PlanInfo; pro: PlanInfo; };
+  finalCta: { title: string; subtitle: string; cta: string; };
+  footer: { product: string; pricing: string; contact: string; terms: string; rights: string; };
+}
+
+export const content: Record<Locale, Content> = {
   en: {
     nav: { product: "Product", pricing: "Pricing", contact: "Contact", start: "Start Free" },
     hero: {
