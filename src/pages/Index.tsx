@@ -1,16 +1,32 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { content, type Locale } from "@/lib/i18n";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import SocialProof from "@/components/SocialProof";
+import HowItWorks from "@/components/HowItWorks";
+import Features from "@/components/Features";
+import Benefits from "@/components/Benefits";
+import Pricing from "@/components/Pricing";
+import FinalCta from "@/components/FinalCta";
+import Footer from "@/components/Footer";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [locale, setLocale] = useState<Locale>("en");
+  const t = content[locale];
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background">
+      <Navbar locale={locale} onLocaleChange={setLocale} />
+      <Hero t={t.hero} />
+      <SocialProof t={t.social} />
+      <HowItWorks t={t.steps} />
+      <Features t={t.features} />
+      <Benefits t={t.benefits} />
+      <Pricing t={t.pricing} />
+      <FinalCta t={t.finalCta} />
+      <Footer t={t.footer} />
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
