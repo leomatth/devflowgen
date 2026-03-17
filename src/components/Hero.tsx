@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import type { Content } from "@/lib/i18n";
 import dashboardMock from "@/assets/dashboard-mock.png";
@@ -10,7 +11,6 @@ interface HeroProps {
 const Hero = ({ t }: HeroProps) => {
   return (
     <section className="relative pt-[18vh] pb-[10vh] px-6 overflow-hidden">
-      {/* Background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
@@ -38,12 +38,11 @@ const Hero = ({ t }: HeroProps) => {
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button variant="hero" size="xl">{t.cta}</Button>
-          <Button variant="hero-outline" size="xl">{t.demo}</Button>
+          <Button asChild variant="hero" size="xl"><Link to="/dashboard">{t.cta}</Link></Button>
+          <Button asChild variant="hero-outline" size="xl"><Link to="/dashboard">{t.demo}</Link></Button>
         </motion.div>
       </div>
 
-      {/* Dashboard Preview */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}

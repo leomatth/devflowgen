@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
 import { content } from "@/lib/i18n";
@@ -34,7 +35,6 @@ const Navbar = ({ locale, onLocaleChange }: NavbarProps) => {
           DevFlow <span className="text-gradient-primary">AI</span>
         </span>
 
-        {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           <a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t.product}</a>
           <a href="#pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{t.pricing}</a>
@@ -46,16 +46,14 @@ const Navbar = ({ locale, onLocaleChange }: NavbarProps) => {
             <Globe className="w-4 h-4" />
             {localeLabels[locale]}
           </button>
-          <Button variant="hero" size="sm">{t.start}</Button>
+          <Button asChild variant="hero" size="sm"><Link to="/dashboard">{t.start}</Link></Button>
         </div>
 
-        {/* Mobile toggle */}
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
@@ -68,7 +66,7 @@ const Navbar = ({ locale, onLocaleChange }: NavbarProps) => {
           <button onClick={() => onLocaleChange(nextLocale())} className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <Globe className="w-4 h-4" /> {localeLabels[locale]}
           </button>
-          <Button variant="hero" size="sm" className="w-full">{t.start}</Button>
+          <Button asChild variant="hero" size="sm" className="w-full"><Link to="/dashboard">{t.start}</Link></Button>
         </motion.div>
       )}
     </motion.nav>
