@@ -6,7 +6,7 @@ interface BenefitItem { title: string; desc: string; }
 interface PlanInfo { name: string; price: string; period: string; features: string[]; cta: string; badge?: string; }
 
 export interface Content {
-  nav: { product: string; pricing: string; contact: string; start: string; };
+  nav: { product: string; pricing: string; contact: string; start: string; login: string; };
   hero: { title: string; subtitle: string; cta: string; demo: string; };
   social: { text: string; };
   steps: { title: string; subtitle: string; items: StepItem[]; };
@@ -19,7 +19,7 @@ export interface Content {
 
 export const content: Record<Locale, Content> = {
   en: {
-    nav: { product: "Product", pricing: "Pricing", contact: "Contact", start: "Start Free" },
+    nav: { product: "Product", pricing: "Pricing", contact: "Contact", start: "Start Free", login: "Login" },
     hero: {
       title: "Create High-Converting Landing Pages in Seconds with AI",
       subtitle: "Turn your idea into a ready-to-use landing page with copy, structure, and design powered by AI.",
@@ -62,20 +62,20 @@ export const content: Record<Locale, Content> = {
     },
     pricing: {
       title: "Simple Pricing",
-      subtitle: "Start free. Upgrade when you're ready.",
+      subtitle: "Free, credits, or Pro — choose what fits your workflow.",
       free: {
         name: "Free",
-        price: "$0",
+        price: "€0",
         period: "/month",
-        features: ["5 page generations", "Basic templates", "Standard copy", "Community support"],
-        cta: "Get Started",
+        features: ["1 generation per day", "Basic templates", "Standard copy", "Community support"],
+        cta: "Start Free",
       },
       pro: {
         name: "Pro",
-        price: "$29",
+        price: "€20",
         period: "/month",
         badge: "Most Popular",
-        features: ["Unlimited generations", "Advanced AI copy", "Multiple variations", "Priority support", "Custom branding", "Export to code"],
+        features: ["Unlimited generations", "Advanced AI copy", "Multiple variations", "Priority support", "Pro 30 Days: €25 one-time", "Credits never expire"],
         cta: "Upgrade to Pro",
       },
     },
@@ -93,7 +93,7 @@ export const content: Record<Locale, Content> = {
     },
   },
   es: {
-    nav: { product: "Producto", pricing: "Precios", contact: "Contacto", start: "Empezar Gratis" },
+    nav: { product: "Producto", pricing: "Precios", contact: "Contacto", start: "Empezar Gratis", login: "Iniciar sesión" },
     hero: {
       title: "Crea Landing Pages de Alta Conversión en Segundos con IA",
       subtitle: "Convierte tu idea en una landing page lista para usar con textos, estructura y diseño impulsados por IA.",
@@ -134,15 +134,15 @@ export const content: Record<Locale, Content> = {
     },
     pricing: {
       title: "Precios Simples",
-      subtitle: "Empieza gratis. Mejora cuando estés listo.",
-      free: { name: "Gratis", price: "$0", period: "/mes", features: ["5 generaciones", "Plantillas básicas", "Texto estándar", "Soporte comunitario"], cta: "Empezar" },
-      pro: { name: "Pro", price: "$29", period: "/mes", badge: "Más Popular", features: ["Generaciones ilimitadas", "Texto avanzado con IA", "Múltiples variaciones", "Soporte prioritario", "Marca personalizada", "Exportar a código"], cta: "Mejorar a Pro" },
+      subtitle: "Gratis, créditos o Pro: elige lo que mejor se adapte a tu flujo.",
+      free: { name: "Gratis", price: "€0", period: "/mes", features: ["1 generación por día", "Plantillas básicas", "Texto estándar", "Soporte comunitario"], cta: "Empezar gratis" },
+      pro: { name: "Pro", price: "€20", period: "/mes", badge: "Más Popular", features: ["Generaciones ilimitadas", "Texto avanzado con IA", "Múltiples variaciones", "Soporte prioritario", "Pro 30 Días: €25 pago único", "Los créditos no caducan"], cta: "Mejorar a Pro" },
     },
     finalCta: { title: "Empieza a construir tu landing page hoy", subtitle: "Sin código. Sin diseño. Solo resultados.", cta: "Empezar Gratis" },
     footer: { product: "Producto", pricing: "Precios", contact: "Contacto", terms: "Términos", rights: "Todos los derechos reservados." },
   },
   pt: {
-    nav: { product: "Produto", pricing: "Preços", contact: "Contato", start: "Começar Grátis" },
+    nav: { product: "Produto", pricing: "Preços", contact: "Contato", start: "Começar Grátis", login: "Entrar" },
     hero: {
       title: "Crie Landing Pages de Alta Conversão em Segundos com IA",
       subtitle: "Transforme sua ideia em uma landing page pronta para uso com textos, estrutura e design gerados por IA.",
@@ -183,9 +183,9 @@ export const content: Record<Locale, Content> = {
     },
     pricing: {
       title: "Preços Simples",
-      subtitle: "Comece grátis. Faça upgrade quando quiser.",
-      free: { name: "Grátis", price: "$0", period: "/mês", features: ["5 gerações", "Templates básicos", "Texto padrão", "Suporte comunitário"], cta: "Começar" },
-      pro: { name: "Pro", price: "$29", period: "/mês", badge: "Mais Popular", features: ["Gerações ilimitadas", "Texto avançado com IA", "Múltiplas variações", "Suporte prioritário", "Marca personalizada", "Exportar para código"], cta: "Fazer Upgrade" },
+      subtitle: "Grátis, créditos ou Pro — escolha o que melhor se adapta ao seu fluxo.",
+      free: { name: "Grátis", price: "€0", period: "/mês", features: ["1 geração por dia", "Templates básicos", "Texto padrão", "Suporte comunitário"], cta: "Começar grátis" },
+      pro: { name: "Pro", price: "€20", period: "/mês", badge: "Mais Popular", features: ["Gerações ilimitadas", "Texto avançado com IA", "Múltiplas variações", "Suporte prioritário", "Pro 30 Dias: €25 pagamento único", "Créditos não expiram"], cta: "Fazer upgrade para Pro" },
     },
     finalCta: { title: "Comece a criar sua landing page hoje", subtitle: "Sem código. Sem design. Apenas resultados.", cta: "Começar Grátis" },
     footer: { product: "Produto", pricing: "Preços", contact: "Contato", terms: "Termos", rights: "Todos os direitos reservados." },

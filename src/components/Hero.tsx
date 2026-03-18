@@ -38,8 +38,8 @@ const Hero = ({ t }: HeroProps) => {
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button asChild variant="hero" size="xl"><Link to="/dashboard">{t.cta}</Link></Button>
-          <Button asChild variant="hero-outline" size="xl"><Link to="/dashboard">{t.demo}</Link></Button>
+          <Button asChild variant="hero" size="xl"><Link to="/auth">{t.cta}</Link></Button>
+          <Button asChild variant="hero-outline" size="xl"><Link to="/auth">{t.demo}</Link></Button>
         </motion.div>
       </div>
 

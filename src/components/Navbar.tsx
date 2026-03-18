@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import type { Locale } from "@/lib/i18n";
 import { content } from "@/lib/i18n";
+import { supabase } from "@/lib/supabase/client";
+import { toast } from "@/components/ui/sonner";
 
 interface NavbarProps {
   locale: Locale;
@@ -15,7 +17,49 @@ const localeLabels: Record<Locale, string> = { en: "EN", es: "ES", pt: "PT" };
 
 const Navbar = ({ locale, onLocaleChange }: NavbarProps) => {
   const [open, setOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const t = content[locale].nav;
+
+  useEffect(() => {
+    if (!supabase) {
+      setIsAuthenticated(false);
+      return;
+    }
+
+    const syncSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      setIsAuthenticated(Boolean(session));
+    };
+
+    void syncSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(Boolean(session));
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    if (!supabase) {
+      return;
+    }
+
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error("Failed to logout.");
+      return;
+    }
+
+    toast.success("Logged out successfully.");
+  };
 
   const nextLocale = (): Locale => {
     const locales: Locale[] = ["en", "es", "pt"];
@@ -46,7 +90,17 @@ const Navbar = ({ locale, onLocaleChange }: NavbarProps) => {
             <Globe className="w-4 h-4" />
             {localeLabels[locale]}
           </button>
-          <Button asChild variant="hero" size="sm"><Link to="/dashboard">{t.start}</Link></Button>
+          {isAuthenticated ? (
+            <>
+              <Button asChild variant="hero-outline" size="sm"><Link to="/dashboard">Dashboard</Link></Button>
+              <Button variant="hero" size="sm" onClick={() => void handleLogout()}>Logout</Button>
+            </>
+          ) : (
+            <>
+              <Button asChild variant="hero-outline" size="sm"><Link to="/auth?mode=signin">{t.login}</Link></Button>
+              <Button asChild variant="hero" size="sm"><Link to="/auth?mode=signup">{t.start}</Link></Button>
+            </>
+          )}
         </div>
 
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
@@ -66,7 +120,17 @@ const Navbar = ({ locale, onLocaleChange }: NavbarProps) => {
           <button onClick={() => onLocaleChange(nextLocale())} className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <Globe className="w-4 h-4" /> {localeLabels[locale]}
           </button>
-          <Button asChild variant="hero" size="sm" className="w-full"><Link to="/dashboard">{t.start}</Link></Button>
+          {isAuthenticated ? (
+            <>
+              <Button asChild variant="hero-outline" size="sm" className="w-full"><Link to="/dashboard">Dashboard</Link></Button>
+              <Button variant="hero" size="sm" className="w-full" onClick={() => void handleLogout()}>Logout</Button>
+            </>
+          ) : (
+            <>
+              <Button asChild variant="hero-outline" size="sm" className="w-full"><Link to="/auth?mode=signin">{t.login}</Link></Button>
+              <Button asChild variant="hero" size="sm" className="w-full"><Link to="/auth?mode=signup">{t.start}</Link></Button>
+            </>
+          )}
         </motion.div>
       )}
     </motion.nav>
